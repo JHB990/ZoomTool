@@ -1,6 +1,6 @@
 import webbrowser
 import datetime 
-#import pyautogui as pytho
+import pyautogui as pytho
 import time
 from pandas import *
 
@@ -9,7 +9,7 @@ schedule_dataframe = schedule_file.parse(schedule_file.sheet_names[0]).fillna(0)
 schedule_dict = schedule_dataframe.to_dict()
 
 
-#print(schedule_dict)
+print(schedule_dict)
 
 days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"]
 
@@ -27,6 +27,8 @@ def open_class():
                 if day == week_day:
                     hour = schedule_dict["Hora"][i].strftime("%H:%M:%S")
                     link_key = "Enlace"+week_day
+                    print(link_key)
+                    time.sleep(20000)
                     link = schedule_dict[link_key][i]
                     
                     
@@ -34,8 +36,7 @@ def open_class():
                         current_time = take_current_time()
                         if current_time == hour:
                             print("Abriendo clases...")
-                            brave_path = 'C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe %s --incognito'
-                            webbrowser.get(brave_path).open_new(link)
+                            webbrowser.open(link)
                             started = True
                             #time.sleep(8)
                             #pytho.press('c')
